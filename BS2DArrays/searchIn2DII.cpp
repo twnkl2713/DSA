@@ -1,36 +1,40 @@
 #include <iostream>
 #include <vector>
+
 using namespace std;
 
 bool searchMatrix(vector<vector<int>>& matrix, int target) {
     int n = matrix.size();
     int m = matrix[0].size();
-    int low = 0, high = (n * m - 1);
+    int row = 0, col = m - 1;
 
-    while (low <= high) {
-        int mid = low + (high - low) / 2;
-        int row = mid / m;
-        int col = mid % m;
-
-        if (matrix[row][col] == target) return true;
-        else if (matrix[row][col] < target) low = mid + 1;
-        else high = mid - 1;
+    while (row < n && col >= 0) {
+        if (matrix[row][col] == target) {
+            return true;
+        } else if (matrix[row][col] < target) {
+            row++;
+        } else {
+            col--;
+        }
     }
-
     return false;
 }
 
 int main() {
     vector<vector<int>> matrix = {
-        {1, 3, 5, 7},
-        {10, 11, 16, 20},
-        {23, 30, 34, 60}
+        {1, 4, 7, 11},
+        {2, 5, 8, 12},
+        {3, 6, 9, 16},
+        {10, 13, 14, 17}
     };
-    int target = 16;
+
+    int target = 5;
+
     if (searchMatrix(matrix, target)) {
         cout << "Target " << target << " found in matrix" << endl;
     } else {
         cout << "Target " << target << " NOT found in matrix" << endl;
     }
+
     return 0;
 }
