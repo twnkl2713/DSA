@@ -1,72 +1,61 @@
-#include <iostream>
-#include <vector>
+#include <bits/stdc++.h>
 using namespace std;
 
-class Edge {
-public:
-    int src, dest;
-    Edge(int s, int d) {
-        src = s;
-        dest = d;
-    }
-};
+// Function to detect cycle using BFS
+bool detectCycle(int src, vector<int> adj[], vector<int>& vis) {
+    vis[src] = 1;
+    queue<pair<int, int>> q;
+    q.push({src, -1}); // node, parent
 
-void createGraph(vector<Edge> graph[], int V) {
-    for (int i = 0; i < V; i++) {
-        graph[i] = vector<Edge>();
-    }
-    graph[0].push_back(Edge(0, 1));
-    graph[0].push_back(Edge(0, 2));
-    graph[0].push_back(Edge(0, 3));
-    graph[1].push_back(Edge(1, 0));
-    graph[1].push_back(Edge(1, 2));
-    graph[2].push_back(Edge(2, 0));
-    graph[2].push_back(Edge(2, 1));
-    graph[3].push_back(Edge(3, 0));
-    graph[3].push_back(Edge(3, 4));
-    graph[4].push_back(Edge(4, 3));
-}
+    while (!q.empty()) {
+        int node = q.front().first;
+        int parent = q.front().second;
+        q.pop();
 
-bool isCyclicUtil(vector<Edge> graph[], vector<bool>& vis, int curr, int par) {
-    vis[curr] = true;
-
-    for (Edge e : graph[curr]) {
-        if (vis[e.dest] && e.dest != par) {
-            // Case 1: visited & not parent → cycle
-            return true;
-        } else if (!vis[e.dest]) {
-            // Case 2: not visited → DFS
-            if (isCyclicUtil(graph, vis, e.dest, curr)) {
-                return true;
+        for (auto neighbor : adj[node]) {
+            if (!vis[neighbor]) {
+                vis[neighbor] = 1;
+                q.push({neighbor, node});
+            } else if (neighbor != parent) {
+                return true; // Found a cycle
             }
         }
-        // Case 3: visited & is parent → do nothing (continue)
     }
-
     return false;
 }
 
-bool isCyclic(vector<Edge> graph[], int V) {
-    vector<bool> vis(V, false);
+// Function to check for cycle in any component
+bool isCycle(int V, vector<vector<int>>& edges) {
+    vector<int> adj[V];
+    for (auto& edge : edges) {
+        int u = edge[0];
+        int v = edge[1];
+        adj[u].push_back(v);
+        adj[v].push_back(u); // Undirected graph
+    }
+
+    vector<int> vis(V, 0);
     for (int i = 0; i < V; i++) {
         if (!vis[i]) {
-            if (isCyclicUtil(graph, vis, i, -1)) {
-                return true;
-            }
+            if (detectCycle(i, adj, vis)) return true;
         }
     }
     return false;
 }
 
 int main() {
-    int V = 5;
-    vector<Edge> graph[V];
-    createGraph(graph, V);
+    int V = 5; // Number of vertices
+    vector<vector<int>> edges = {
+        {0, 1},
+        {1, 2},
+        {2, 0}, // This forms a cycle
+        {3, 4}
+    };
 
-    if (isCyclic(graph, V)) {
-        cout << "Cycle detected" << endl;
+    if (isCycle(V, edges)) {
+        cout << "Cycle Detected!" << endl;
     } else {
-        cout << "No cycle detected" << endl;
+        cout << "No Cycle Found." << endl;
     }
     return 0;
 }
