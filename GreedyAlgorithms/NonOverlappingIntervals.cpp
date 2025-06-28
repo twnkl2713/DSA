@@ -1,6 +1,6 @@
-#include <iostream>
-#include <vector>
-#include <algorithm>
+#include<iostream>
+#include<vector>
+#include<algorithm>
 using namespace std;
 
 bool comp(const vector<int>& a, const vector<int>& b) {
