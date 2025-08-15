@@ -1,7 +1,6 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-// Helper DFS function
 void dfs(int row, int col, vector<vector<int>> &ans, vector<vector<int>>& image, int newColor, int iniColor, int delRow[], int delCol[]) {
     ans[row][col] = newColor;
     int n = image.size();
@@ -19,13 +18,9 @@ void dfs(int row, int col, vector<vector<int>> &ans, vector<vector<int>>& image,
     }
 }
 
-// Flood fill function
 vector<vector<int>> floodFill(vector<vector<int>>& image, int sr, int sc, int color) {
     int iniColor = image[sr][sc];
     vector<vector<int>> ans = image;
-
-    // If the starting pixel already has the new color, nothing to do
-    if (iniColor == color) return ans;
 
     // Directions: up, right, down, left
     int delRow[] = {-1, 0, +1, 0};
@@ -36,25 +31,20 @@ vector<vector<int>> floodFill(vector<vector<int>>& image, int sr, int sc, int co
     return ans;
 }
 
-// Main function
 int main() {
     vector<vector<int>> image = {
         {1, 1, 1},
         {1, 1, 0},
         {1, 0, 1}
     };
-
     int sr = 1, sc = 1; // starting row and column
     int newColor = 2;
-
     vector<vector<int>> result = floodFill(image, sr, sc, newColor);
-
     cout << "Flood Filled Image:\n";
     for (auto& row : result) {
         for (int pixel : row)
             cout << pixel << " ";
         cout << "\n";
     }
-
     return 0;
 }

@@ -52,7 +52,7 @@ int orangesRotting(vector<vector<int>>& grid) {
             }
         }
     }
-    if(cnt != cntfresh) return -1; //it means some oranges couldn't be rotted
+    if(cnt != cntfresh) return -1; // it means some oranges couldn't be rotted
     return time;
 }
 

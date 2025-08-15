@@ -3,42 +3,22 @@
 #include <queue>
 using namespace std;
 
-int kthSmallest(vector<int>& arr, int k) {
-    priority_queue<int> pq;
-
-    // Step 1: Insert first k elements into the max-heap
-    for (int i = 0; i < k; i++) {
-        pq.push(arr[i]);
-    }
-
-    // Step 2: For remaining elements, maintain heap of k smallest
-    for (int i = k; i < arr.size(); i++) {
-        if (arr[i] < pq.top()) {
-            pq.pop();
-            pq.push(arr[i]);
+int kthSmallest(vector<int> &arr, int k) {
+    priority_queue<int> maxi; // max-heap
+    int n = arr.size();
+    for (int i = 0; i < n; i++) {
+        maxi.push(arr[i]);
+        if (maxi.size() > k) {
+            maxi.pop(); // remove largest so only k smallest remain
         }
     }
-
-    // Step 3: Return the top element of max-heap
-    return pq.top();
+    return maxi.top();
 }
 
 int main() {
-    int n, k;
-    cout << "Enter number of elements in array: ";
-    cin >> n;
-
-    vector<int> arr(n);
-    cout << "Enter the elements of array:\n";
-    for (int i = 0; i < n; i++) {
-        cin >> arr[i];
-    }
-
-    cout << "Enter the value of k: ";
-    cin >> k;
-
+    vector<int> arr = {7, 10, 4, 3, 20, 15};
+    int k = 3;
     int result = kthSmallest(arr, k);
-    cout << "The " << k << "th smallest element is: " << result << endl;
-
+    cout << k << "-th smallest element is: " << result << endl;
     return 0;
 }
