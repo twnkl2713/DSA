@@ -15,16 +15,14 @@ void sortKSortedArray(vector<int>& nums, int k) {
 
     // step 2: process remaining elements
     for(int i=k+1; i<n; i++) {
-        nums[idx] = minHeap.top();
-        idx++;
+        nums[idx++] = minHeap.top();
         minHeap.pop();
         minHeap.push(nums[i]);
     }
 
     // step 3: pop remaining elements
     while(!minHeap.empty()) {
-        nums[idx] = minHeap.top();
-        idx++;
+        nums[idx++] = minHeap.top();
         minHeap.pop();
     }
 }
