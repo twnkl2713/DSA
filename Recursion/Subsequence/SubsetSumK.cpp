@@ -29,6 +29,12 @@ int subsetSumEqualsK(vector<int>& nums, int k) {
     vector<int> ds;
     int sum = 0;
     printS(0, nums, sum, k, ds, ans);
+    cout << "Subsets with sum = " << k << ":\n";
+    for(auto &subset : ans) {
+        cout << "{ ";
+        for(int x : subset) cout << x << " ";
+        cout << "}\n";
+    }
     return ans.size(); // count of subsets with sum k
 }
 
