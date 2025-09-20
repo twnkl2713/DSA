@@ -23,10 +23,10 @@ vector<vector<int>> threeSum(vector<int>& nums) {
                 vector<int> temp = {nums[i], nums[j], nums[k]};
                 ans.push_back(temp);
                 j++; k--;
-                while(j < k && nums[j] == nums[j-1]) {
+                while(j < k && nums[j] == nums[j-1]) { // skip duplicates
                     j++;
                 }
-                while(j < k && nums[k] == nums[k+1]) {
+                while(j < k && nums[k] == nums[k+1]) { // skip duplicates
                     k--;
                 }
             }
