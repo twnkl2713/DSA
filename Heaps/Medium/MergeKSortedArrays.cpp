@@ -8,7 +8,7 @@ vector<int> mergeKArrays(vector<vector<int>> arr, int K) {
     priority_queue<type, vector<type>, greater<type>> minHeap;
     for (int i = 0; i < K; i++) {
         if (!arr[i].empty()) {
-            minHeap.push({arr[i][0], i, 0});
+            minHeap.push({arr[i][0], i, 0}); // [value, arrayIndex, elementIndex]
         }
     }
     vector<int> result;
