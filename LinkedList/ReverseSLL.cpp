@@ -10,13 +10,25 @@ struct Node {
     }  
 };
 
-Node* reverseLL(Node* head) {
+Node* reverseLLRec(Node* head) {
     if(head == NULL || head->next == NULL) return head;
-    Node* newHead = reverseLL(head->next);
+    Node* newHead = reverseLLRec(head->next);
     Node* front = head->next;
     front->next = head;
     head->next = NULL;
     return newHead;
+}
+
+Node* reverseLL(Node* head) {
+    Node* prev = NULL;
+    Node* curr = head;
+    Node* next = NULL;
+    while(curr != NULL) {
+        next = curr->next;  
+        curr->next = prev;  
+        prev = curr;        
+        curr = next;       
+    }
 }
 
 void printList(Node* head) {
