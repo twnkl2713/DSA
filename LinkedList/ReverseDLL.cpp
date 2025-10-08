@@ -38,7 +38,6 @@ void printDLL(Node* head) {
 }
 
 int main() {
-    // Create DLL: 1 <-> 2 <-> 3 <-> 4 <-> 5
     Node* head = new Node(1);
     Node* second = new Node(2);
     Node* third = new Node(3);
