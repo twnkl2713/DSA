@@ -28,6 +28,13 @@ Node* reverseDLL(Node* head) {
     return head;
 }
 
+Node* deleteDLLRecursively(Node* head) {
+    if (head == nullptr) return nullptr;
+    deleteDLLRecursively(head->next);
+    delete head;
+    return nullptr;
+}
+
 void printDLL(Node* head) {
     Node* temp = head;
     while (temp != nullptr) {
