@@ -9,6 +9,7 @@ struct Item {
     int weight;
 };
 
+// value/weight comparison
 bool comp(Item a, Item b) {
     double r1 = (double)a.value / a.weight;
     double r2 = (double)b.value / b.weight;
