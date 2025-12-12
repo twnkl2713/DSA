@@ -72,3 +72,20 @@ int main() {
 
     return 0;
 }
+
+void bfs(int source, unordered_map<int, vector<int>>graph, int n) {
+    queue<int> q;
+    visited<int> visited(n+1);
+    q.push(source);
+    visited[source] = 1;
+    while(!q.empty()) {
+        int f = q.front();
+        q.pop();
+        for(int nbr : graph[f]) {
+            if(!visited[nbr]) {
+                q.push(nbr);
+                visited[nbr] = 1;
+            }
+        }
+    }
+}
