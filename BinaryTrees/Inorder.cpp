@@ -12,13 +12,13 @@ struct Node {
     }
 };
 
-void preorder(Node* root) {
+void inorder(Node* root) {
     if (root == nullptr)
         return;
   
-    preorder(root->left);
+    inorder(root->left);
     cout << root->data << " ";  
-    preorder(root->right);  
+    inorder(root->right);  
 }
 
 int main() {
@@ -29,8 +29,8 @@ int main() {
     root->left->right = new Node(5);
     root->right->left = new Node(6);
 
-    cout << "Preorder Traversal: ";
-    preorder(root);
+    cout << "Inorder Traversal: ";
+    inorder(root);
     cout << endl;
 
     return 0;
